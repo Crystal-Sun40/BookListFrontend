@@ -1,0 +1,12 @@
+.BookCardContainer{
+    max-width: 310px;
+    margin: auto;
+}
+.BookCardImage{
+    height: 200px !important;
+    max-width: 310px;
+     
+}
+.BookCardDescription{
+    overflow-wrap: break-word;
+}
