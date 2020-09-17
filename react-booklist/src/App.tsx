@@ -13,16 +13,18 @@ import {UnauthorizedPage} from "./pages/UnauthorizedPage/UnauthorizedPage";
 function App() {
 
     return (
-        <PageWrapper>
-            <LoginBar />
-            <Switch>
-                <Route exact path="/" component={BookListPage}/>
-                <Route exact path="/book-list" component={BookListPage}/>
-                <Route exact path="/unauthorized" component={UnauthorizedPage}/>
-                <PrivateRoute exact path="/edit-detail/:id" component={EditBookPage}/>
-                <PrivateRoute exact path="/add" component={AddBookPage}/>
-            </Switch>
-        </PageWrapper>
+        <>
+            <LoginBar/>
+            <PageWrapper>
+                <Switch>
+                    <Route exact path="/" component={BookListPage}/>
+                    <Route exact path="/book-list" component={BookListPage}/>
+                    <Route exact path="/unauthorized" component={UnauthorizedPage}/>
+                    <PrivateRoute exact path="/edit-detail/:id" component={EditBookPage}/>
+                    <PrivateRoute exact path="/add" component={AddBookPage}/>
+                </Switch>
+            </PageWrapper>
+        </>
     );
 }
 

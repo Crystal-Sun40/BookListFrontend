@@ -1,9 +1,10 @@
 .BookCardContainer{
     max-width: 310px;
+    height:500px;
     margin: auto;
 }
 .BookCardImage{
-    height: 200px !important;
+    height: 350px !important;
     max-width: 310px;
 }
 .BookCardDescription{

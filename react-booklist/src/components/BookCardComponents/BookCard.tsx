@@ -1,6 +1,6 @@
 import React from "react";
 import './bookCard.css'
-import { Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
+import {Card, CardActionArea, CardContent, CardMedia, Typography} from "@material-ui/core";
 import {BookDetailsType} from "../../type/BookDetailsType";
 
 
@@ -11,7 +11,7 @@ function BookCard(props: BookDetailsType) {
         window.location.href = `/edit-detail/${props.bookId}`;
     };
     return (
-            <Card className="BookCardContainer" onClick={handleDetail}>
+            <Card className="BookCardContainer" onClick={handleDetail} >
                 <CardActionArea>
                     <CardMedia
                         className="BookCardImage"

@@ -1,10 +1,12 @@
 import React, {FC, useEffect, useState} from "react"
 import BookCard from "../../components/BookCardComponents/BookCard"
-import {Grid} from "@material-ui/core";
+import {Button, Grid} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import {VoiceInput} from "../../components/VoiceInput/VoiceInput";
-import {getBookList} from "../../services/bookListServices";
+import {getBookList} from "../../services/bookListService";
 import {BookDetailsType} from "../../type/BookDetailsType";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 
 export const BookListPage: FC = () => {
@@ -19,7 +21,7 @@ export const BookListPage: FC = () => {
         window.location.href = '/add/';
     };
     const handleVoice = (value: string) => {
-        getBookList().then((result:BookDetailsType[]) => {
+        getBookList().then((result: BookDetailsType[]) => {
             setBookList(result.filter(book => (book.bookTitle.toLowerCase().includes(value.toLowerCase()))));
         });
     };
@@ -34,18 +36,21 @@ export const BookListPage: FC = () => {
     };
 
     return (
-        <>
-            <VoiceInput handleVoice={handleVoice}/>
+        <Box marginTop={4}>
+            <Typography variant={"h3"}>MSA BookList</Typography>
+                <VoiceInput handleVoice={handleVoice}/>
+            <Box display="flex" justifyContent="flex-end" paddingY={4}>
+                <IconButton color="primary" onClick={handleAddBook}>
+                    + Add book
+                </IconButton>
+                <Button variant="contained" color="primary" onClick={handleShare}>share with facebook</Button>
+            </Box>
             <Grid container spacing={2}>
                 {bookList.map((book, index) =>
-                    <Grid item xs={3} key={index}>
+                    <Grid item xs={12} md={3} key={index}>
                         <BookCard {...book} />
                     </Grid>)}
             </Grid>
-            <IconButton color="primary" onClick={handleAddBook}>
-                + Add book
-            </IconButton>
-            <button onClick={handleShare}>share</button>
-            </>
+        </Box>
     )
 };

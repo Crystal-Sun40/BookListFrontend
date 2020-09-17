@@ -12,6 +12,7 @@ export const FormikInput: FC<Props> = ({field, ...props}) => {
         <TextField
             {...field}
             {...props}
+            fullWidth={true}
             variant="outlined"
         />
     );
