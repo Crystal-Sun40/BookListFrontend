@@ -7,6 +7,7 @@ export const LoginBar: FC = () => {
         console.log(response);
         if (response.status !== "unknown") {
             window.sessionStorage.setItem("isLoggedIn", "true");
+            window.sessionStorage.setItem("userName", "true");
         }
     };
 
@@ -14,7 +15,7 @@ export const LoginBar: FC = () => {
         window.sessionStorage.setItem("isLoggedIn", "false");
         // @ts-ignore
         window.FB.logout();
-        // window.location.href = '/'
+        window.location.href = '/'
     };
     return (
         <>

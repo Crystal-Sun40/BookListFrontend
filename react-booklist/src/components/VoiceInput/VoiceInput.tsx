@@ -7,21 +7,13 @@ interface Props {
     handleVoice:(value:string)=>void
 }
 export const VoiceInput:FC<Props> = ({handleVoice})=>{
-    const [isActive, setActive] = useState(false);
-    const [voiceValue, setVoiceValue] = useState("");
-    const { transcript } = useSpeechRecognition({ transcribing:isActive });
+    const { transcript } = useSpeechRecognition();
     const handleVoiceStart = () =>{
-        // need to clean the input value or onChange to change the value
-        setVoiceValue("");
-        setActive(true);
         SpeechRecognition.startListening();
     };
     const handleVoiceEnd = () =>{
-        setVoiceValue(transcript);
         handleVoice(transcript);
-        setActive(false);
         SpeechRecognition.stopListening();
-
     };
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
         return null
@@ -29,10 +21,10 @@ export const VoiceInput:FC<Props> = ({handleVoice})=>{
 
     return (
         <div>
-            <input defaultValue={isActive?transcript:voiceValue} />
             <IconButton color="primary" aria-label="" onMouseDown={handleVoiceStart} onMouseUp={handleVoiceEnd}>
                 <MicIcon />
             </IconButton>
+            <p>{transcript}</p>
         </div>
     )
 }

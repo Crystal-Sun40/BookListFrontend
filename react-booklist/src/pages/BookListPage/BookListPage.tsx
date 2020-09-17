@@ -9,17 +9,28 @@ import {BookDetailsType} from "../../type/BookDetailsType";
 
 export const BookListPage: FC = () => {
     const [bookList, setBookList] = useState<BookDetailsType[]>([]);
-    useEffect( () => {
-        getBookList().then(result =>{
+    useEffect(() => {
+        getBookList().then(result => {
             setBookList(result);
         });
-    },[]);
+    }, []);
 
     const handleAddBook = () => {
         window.location.href = '/add/';
     };
     const handleVoice = (value: string) => {
-
+        getBookList().then((result:BookDetailsType[]) => {
+            setBookList(result.filter(book => (book.bookTitle.toLowerCase().includes(value.toLowerCase()))));
+        });
+    };
+    const handleShare = () => {
+        // @ts-ignore
+        window.FB.ui({
+            display: 'popup',
+            method: 'share',
+            href: 'https://booklistfrontend.azurewebsites.net/',
+        }, function () {
+        });
     };
 
     return (
@@ -27,13 +38,14 @@ export const BookListPage: FC = () => {
             <VoiceInput handleVoice={handleVoice}/>
             <Grid container spacing={2}>
                 {bookList.map((book, index) =>
-                    <Grid item xs={2} key={index}>
+                    <Grid item xs={3} key={index}>
                         <BookCard {...book} />
                     </Grid>)}
             </Grid>
             <IconButton color="primary" onClick={handleAddBook}>
                 + Add book
             </IconButton>
-        </>
+            <button onClick={handleShare}>share</button>
+            </>
     )
 };
